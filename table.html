@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Expense Calculator</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Expense Calculator</h1>
+    <div class="input-group">
+      <label for="total-amount">Total Amount:</label>
+      <input type="number" id="total-amount" placeholder="Enter total amount">
+    </div>
+    <div class="input-group">
+      <label for="leave-amount">Paid Amount:</label>
+      <input type="number" id="leave-amount" placeholder="Enter leave amount">
+    </div>
+    <button onclick="calculate()">Calculate</button>
+    <div id="result"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #192d2f;
+  }
+  
+  .container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #838383;
+    border-radius: 30px;
+    box-shadow: 0 20px 10px rgb(0, 0, 0);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+  }
+  
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #0a0f13fa;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #324059;
+  }
+  
+  #result {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  </style>
+
+
+<script>
+
+const USD_TO_INR = 1;
+
+function calculate() {
+  const totalAmountUSD = parseFloat(document.getElementById("total-amount").value);
+  const leaveAmountUSD = parseFloat(document.getElementById("leave-amount").value);
+
+  if (isNaN(totalAmountUSD) || isNaN(leaveAmountUSD)) {
+    alert("Please enter valid numbers for Total Amount and Leave Amount.");
+    return;
+  }
+
+  const totalAmountINR = totalAmountUSD * USD_TO_INR;
+  const leaveAmountINR = leaveAmountUSD * USD_TO_INR;
+  const remainingAmountINR = totalAmountINR - leaveAmountINR;
+
+  const resultElement = document.getElementById("result");
+  resultElement.innerHTML = `Total Amount: ₹${totalAmountINR.toFixed(2)}, Leave Amount: ₹${leaveAmountINR.toFixed(2)}, Remaining Amount: ₹${remainingAmountINR.toFixed(2)}`;
+}
+
+  </script>
